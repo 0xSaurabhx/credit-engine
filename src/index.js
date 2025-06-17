@@ -8,6 +8,19 @@ app.use(bodyParser.json());
 
 const creditsDB = {}; // In-memory store for demo
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Credit Engine API',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      enroll: 'POST /api/enroll',
+      credits: 'GET /api/credits/:userId',
+      docs: "https://github.com/0xSaurabhx/credit-engine/blob/main/README.md"
+    }
+  });
+});
+
 app.post('/api/enroll', (req, res) => {
   const validation = validatePayload(req.body);
   if (!validation.valid) {
